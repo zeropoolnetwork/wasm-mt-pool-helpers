@@ -48,9 +48,9 @@ pub fn num_threads() -> usize {
 
 pub async fn parallel_map<T, R, F>(data: Vec<T>, func: F) -> Vec<R>
     where
-        T: Serialize + DeserializeOwned + Send + Clone + 'static,
-        R: Serialize + DeserializeOwned + Send + Clone + 'static,
-        F: Fn(usize, T) -> R + Clone + Serialize + DeserializeOwned + Send + Sync + 'static,
+        T: Serialize + DeserializeOwned + Clone + 'static,
+        R: Serialize + DeserializeOwned + Clone + 'static,
+        F: Fn(usize, T) -> R + Clone + Serialize + DeserializeOwned + 'static,
 {
     let data_size = data.len();
     let pool = &POOL.get().unwrap();
